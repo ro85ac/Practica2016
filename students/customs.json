@@ -1,0 +1,9 @@
+{
+    "elements": {
+        "p:dialog": {},
+        "ui:repeat": {},
+        "p:outputPanel": {},
+        "h:outputText": {}
+    },
+    "attributes": {}
+}
