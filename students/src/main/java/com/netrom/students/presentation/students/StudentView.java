@@ -24,7 +24,6 @@ public class StudentView implements Serializable {
 
     @Inject
     private Students studentBoundary;
-
     private List<Student> students;
 
     private Student selectedStudent;

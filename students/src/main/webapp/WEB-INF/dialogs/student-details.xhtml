@@ -4,25 +4,31 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-
     <ui:composition>
-        <h:form>
-            <p:dialog header="Student Info" widgetVar="studentDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+        <p:dialog header="Student Info" widgetVar="studentDialog">
+            <h:form id="editStudentForm">
                 <p:outputPanel id="studentDetail" style="text-align:center;">
-                    <p:panelGrid  columns="2" rendered="#{not empty studentView.selectedStudent}" columnClasses="label,value">
+                    <p:panelGrid  columns="2" columnClasses="label,value">
 
-                        <h:outputText value="Firstname" />
-                        <h:outputText value="#{studentView.selectedStudent.firstName}" />
+                        <h:outputText value="Firstname:" />
+                        <h:inputText value="#{studentView.selectedStudent.firstName}" />
 
-                        <h:outputText value="Lastname" />
-                        <h:outputText value="#{studentView.selectedStudent.lastName}"/>
+                        <h:outputText value="Lastname:" />
+                        <h:inputText value="#{studentView.selectedStudent.lastName}"/>
 
-                        <h:outputText value="Date of birth" />
-                        <h:outputText value="$#{studentView.selectedStudent.dateOfBirth}" />
+                        <h:outputText value="Date of birth:" />
+                        <p:calendar id="dob" pattern="dd/MM/yyyy" 
+                                    value="#{studentView.selectedStudent.dateOfBirth}" 
+                                    converter="localDateConverter" />
                     </p:panelGrid>
+<!--                    <p:commandButton id="submitChanges" 
+                                     value="Save changes"
+                                     actionListener="#{studentView.saveStudent()}"
+                                     oncomplete="PF('studentDialog').hide();"
+                                     update=":editStudentForm :studentsForm" />-->
                 </p:outputPanel>
-            </p:dialog>
-        </h:form>
+            </h:form>
+        </p:dialog>
     </ui:composition>
 </html>
 

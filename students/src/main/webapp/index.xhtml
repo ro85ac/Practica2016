@@ -26,15 +26,15 @@
                 <p:column headerText="Lastname">
                     <h:outputText value="#{student.lastName}" />
                 </p:column>
-                <p:column headerText="Date of birth">
-                    <h:outputText value="#{student.dateOfBirth}" />
+                <p:column headerText="Date of birth" width="10%">
+                    <h:outputText value="#{student.dateOfBirth}" converter="localDateConverter"/>
                 </p:column>
-                <p:column headerText="Actions">
-                    <p:commandButton value="Edit" update=":editStudentForm" oncomplete="PF('studentDialog').show()">
+                <p:column headerText="Actions" width="10%">
+                    <p:commandButton value="Edit" update=":editStudentForm" onclick="PF('studentDialog').show()">
                         <f:setPropertyActionListener value="#{student}" target="#{studentView.selectedStudent}" />
                     </p:commandButton>
 
-                    <p:commandButton value="Delete" oncomplete="PF('deleteStudentDialog').show()">
+                    <p:commandButton value="Delete" onclick="PF('deleteStudentDialog').show()">
                         <f:setPropertyActionListener value="#{student}" target="#{studentView.selectedStudent}" />
                     </p:commandButton>
                 </p:column>
@@ -42,31 +42,31 @@
         </h:form>
 
 
-        <p:dialog header="Student Info" widgetVar="studentDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false"
-                  dynamic="true">
-            <h:form id="editStudentForm" prependId="false">
-                <p:outputPanel id="studentDetail" style="text-align:center;">
-                    <p:panelGrid  columns="2" columnClasses="label,value">
+        <!--        <p:dialog header="Student Info" widgetVar="studentDialog">
+                    <h:form id="editStudentForm" prependId="false">
+                        <p:outputPanel id="studentDetail" style="text-align:center;">
+                            <p:panelGrid  columns="2" columnClasses="label,value">
+        
+                                <h:outputText value="Firstname:" />
+                                <h:inputText value="#{studentView.selectedStudent.firstName}" />
+        
+                                <h:outputText value="Lastname:" />
+                                <h:inputText value="#{studentView.selectedStudent.lastName}"/>
+        
+                                <h:outputText value="Date of birth:" />
+                                <p:calendar id="dob" pattern="dd/MM/yyyy" 
+                                            value="#{studentView.selectedStudent.dateOfBirth}" 
+                                            converter="localDateConverter" />
+                            </p:panelGrid>
+                            <p:commandButton id="submitChanges" 
+                                             value="Save changes"
+                                             actionListener="#{studentView.saveStudent()}"
+                                             oncomplete="PF('studentDialog').hide();" update=":editStudentForm :studentsForm" />
+                        </p:outputPanel>
+                    </h:form>
+                </p:dialog>-->
 
-                        <h:outputText value="Firstname:" />
-                        <h:inputText value="#{studentView.selectedStudent.firstName}" />
-
-                        <h:outputText value="Lastname:" />
-                        <h:inputText value="#{studentView.selectedStudent.lastName}"/>
-
-                        <h:outputText value="Date of birth:" />
-                        <p:calendar id="dob" pattern="dd/MM/yyyy" 
-                                    value="#{studentView.selectedStudent.dateOfBirth}" 
-                                    converter="localDateConverter" />
-                    </p:panelGrid>
-                    <p:commandButton id="submitChanges" 
-                                     value="Save changes"
-                                     actionListener="#{studentView.saveStudent()}"
-                                     oncomplete="PF('studentDialog').hide();" update=":editStudentForm :studentsForm" />
-                </p:outputPanel>
-            </h:form>
-        </p:dialog>
-
+        <ui:include src="/WEB-INF/dialogs/student-details.xhtml" />
         <p:confirmDialog id="deleteConfirmDialog" message="Are you sure?"
                          header="Delete student" severity="alert"
                          widgetVar="deleteStudentDialog">

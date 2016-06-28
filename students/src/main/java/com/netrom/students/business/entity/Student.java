@@ -7,10 +7,13 @@ package com.netrom.students.business.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -28,6 +31,9 @@ public class Student implements Serializable {
     private String lastName;
 
     private LocalDate dateOfBirth;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Event> events;
 
     public Long getId() {
         return id;
@@ -61,4 +67,11 @@ public class Student implements Serializable {
         this.dateOfBirth = dateOfBirth;
     }
 
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
 }
