@@ -5,7 +5,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <ui:composition>
-        <p:dialog header="Student Info" widgetVar="studentDialog">
+        <p:dialog header="Student Info" widgetVar="studentDialog" appendTo="@body">
             <h:form id="editStudentForm">
                 <p:outputPanel id="studentDetail" style="text-align:center;">
                     <p:panelGrid  columns="2" columnClasses="label,value">

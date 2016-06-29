@@ -39,13 +39,13 @@ public class StudentView implements Serializable {
             students.add(selectedStudent);
         }
         studentBoundary.save(selectedStudent);
-        this.selectedStudent = new Student();
+        selectedStudent = new Student();
     }
 
     public void deleteStudent() {
         studentBoundary.delete(selectedStudent);
         students.remove(selectedStudent);
-        this.selectedStudent = new Student();
+        selectedStudent = new Student();
     }
 
     public List<Student> getStudents() {

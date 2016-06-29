@@ -15,10 +15,7 @@
     <h:body>
 
         <h:form id="studentsForm" prependId="false">
-            <p:growl id="msgs" showDetail="true" />
-
-            <p:commandButton value="Add student" oncomplete="PF('studentDialog').show()"/>
-
+            <p:commandButton value="Add student" onclick="PF('studentDialog').show()"/>
             <p:dataTable id="studentsTable" var="student" value="#{studentView.students}" sortBy="#{student.firstName}">
                 <p:column headerText="Firstname">
                     <h:outputText value="#{student.firstName}" />
@@ -40,33 +37,31 @@
                 </p:column>
             </p:dataTable>
         </h:form>
+        <!--        <ui:include src="/WEB-INF/dialogs/student-details.xhtml"/>-->
+        <p:dialog header="Student Info" widgetVar="studentDialog">
+            <h:form id="editStudentForm" prependId="false">
+                <p:outputPanel id="studentDetail" style="text-align:center;">
+                    <p:panelGrid  columns="2" columnClasses="label,value">
 
+                        <h:outputText value="Firstname:" />
+                        <h:inputText value="#{studentView.selectedStudent.firstName}" />
 
-        <!--        <p:dialog header="Student Info" widgetVar="studentDialog">
-                    <h:form id="editStudentForm" prependId="false">
-                        <p:outputPanel id="studentDetail" style="text-align:center;">
-                            <p:panelGrid  columns="2" columnClasses="label,value">
-        
-                                <h:outputText value="Firstname:" />
-                                <h:inputText value="#{studentView.selectedStudent.firstName}" />
-        
-                                <h:outputText value="Lastname:" />
-                                <h:inputText value="#{studentView.selectedStudent.lastName}"/>
-        
-                                <h:outputText value="Date of birth:" />
-                                <p:calendar id="dob" pattern="dd/MM/yyyy" 
-                                            value="#{studentView.selectedStudent.dateOfBirth}" 
-                                            converter="localDateConverter" />
-                            </p:panelGrid>
-                            <p:commandButton id="submitChanges" 
-                                             value="Save changes"
-                                             actionListener="#{studentView.saveStudent()}"
-                                             oncomplete="PF('studentDialog').hide();" update=":editStudentForm :studentsForm" />
-                        </p:outputPanel>
-                    </h:form>
-                </p:dialog>-->
+                        <h:outputText value="Lastname:" />
+                        <h:inputText value="#{studentView.selectedStudent.lastName}"/>
 
-        <ui:include src="/WEB-INF/dialogs/student-details.xhtml" />
+                        <h:outputText value="Date of birth:" />
+                        <p:calendar id="dob" pattern="dd/MM/yyyy" 
+                                    value="#{studentView.selectedStudent.dateOfBirth}" 
+                                    converter="localDateConverter" />
+                    </p:panelGrid>
+                    <p:commandButton id="submitChanges" 
+                                     value="Save changes"
+                                     actionListener="#{studentView.saveStudent()}"
+                                     oncomplete="PF('studentDialog').hide();" update=":editStudentForm :studentsForm" />
+                </p:outputPanel>
+            </h:form>
+        </p:dialog>
+
         <p:confirmDialog id="deleteConfirmDialog" message="Are you sure?"
                          header="Delete student" severity="alert"
                          widgetVar="deleteStudentDialog">
@@ -80,7 +75,6 @@
                                  oncomplete="PF('deleteStudentDialog').hide()"/>
             </h:form>
         </p:confirmDialog>
-
     </h:body>
 </html>
 
